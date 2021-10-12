@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span th:text="${currentUser.name}"></span>
+<br>
+<span th:text="${currentUser.lastName}"></span>
+<br>
+<span th:text="${currentUser.email}"></span>
+<br>
+<span th:text="${currentUser.phoneNumber}"></span>
+<br>
+<br>
+
+<span th:if="${passportIsNotNull==true}">
+    <h3>Passport details</h3>
+
+
+  <form action="/addPassport" method="post" th:object="${currentUserPassport}">
+<input type="hidden" th:field="*{id}" name="id">
+  <label>Passport number:</label>
+    <input name="seriaNumber" placeholder="seriaNumber" th:field="*{seriaNumber}"
+           th:placeholder="${currentUser.passportId.seriaNumber}" type="text">
+    <br>
+    <br>
+     <label>Date of Birth:</label>
+  <input name="dateOfBirth" th:placeholder="${currentUser.passportId.dateOfBirth}" th:field="*{dateOfBirth}"
+         type="date">
+
+
+     <br>
+    <br>
+     <label>Place of Birth:</label>
+  <input name="registration" placeholder="registration" th:field="*{registration}"
+         th:placeholder="${currentUser.passportId.registration}" type="text">
+ <br>
+    <br>
+  <input type="submit" value="Change passport details">
+</form>
+
+</span>
+
+<span th:unless="${passportIsNotNull==true}">
+<form action="/addPassport" method="post" th:object="${newUserPassport}">
+<input name="userId" th:value="${currentUser.id}" type="hidden">
+  <input name="seriaNumber" placeholder="seriaNumber" th:field="*{seriaNumber}" type="text">
+    <br>
+    <br>
+
+  <input name="dateOfBirth" placeholder="dateOfBirth" th:field="*{dateOfBirth}" type="date">
+    <br>
+    <br>
+  <input name="registration" placeholder="registration" th:field="*{registration}" type="text">
+    <br>
+    <br>
+
+  <input type="submit" value="Add passport">
+
+</form>
+  </span>
+<br>
+<br>
+<form method="post" action="/personalCabinet" th:object="${currentUser}">
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{passportId}">
+    <input type="hidden" th:field="*{password}">
+    <input type="hidden" th:field="*{phoneNumber}">
+    <input type="hidden" th:field="*{email}">
+    <input type="hidden" th:field="*{lastName}">
+    <input type="hidden" th:field="*{phoneNumber}">
+
+    <input type="submit" value="Back to personal cabinet">
+</form>
+</body>
+</html>

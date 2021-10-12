@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/project.css" rel="stylesheet">
+</head>
+<body>
+<div class="testbox">
+    <h1>User Registration</h1>
+
+
+    <form action="/registration" method="post" th:object="${user}">
+
+
+        <input placeholder="Name" th:field="*{name}" type="text">
+
+        <span th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></span>
+
+        <input placeholder="Last name" th:field="*{lastName}" type="text">
+
+        <span th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}"></span>
+
+        <input placeholder="Phone number" th:field="*{phoneNumber}" type="text">
+
+
+        <input placeholder="Email" th:field="*{email}" type="text">
+
+        <span th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
+
+        <input placeholder="Password" th:field="*{password}" type="password">
+
+        <input type="submit" value="Register">
+    </form>
+</div>
+<a href="/authentification">Navigate to login page </a>
+</body>
+</html>
